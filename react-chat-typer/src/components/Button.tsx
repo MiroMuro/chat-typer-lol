@@ -31,12 +31,20 @@ const Button = <T extends string>({
   const handleButtonClick = () => {
     console.log("Button clicked:", text);
     setPressedButton("");
-    setButtonStates((prevStates) => ({ ...prevStates, [text]: true }));
+    //Can listen multiple buttons at once, not intended behavior.
+    //setButtonStates((prevStates) => ({ ...prevStates, [text]: true }));
 
+    setButtonStates((prevStates) => ({
+      ...Object.keys(prevStates).reduce(
+        (acc, key) => ({ ...acc, [key]: key === text }),
+        { [text]: true } as Record<T, boolean>
+      ),
+    }));
+
+    console.log("Button states:", buttonStates);
     setListening(true);
   };
 
-  // Clean up effect
   useEffect(() => {
     if (listening && buttonStates[text]) {
       console.log("Adding event listener for button:", text);
@@ -44,6 +52,7 @@ const Button = <T extends string>({
     }
     //Remove event listener when unmounting, or dependencies change.
     return () => {
+      //setListening(false);
       console.log("Removing event listener for button:", text);
       window.removeEventListener("keydown", keyDownHandler);
     };
@@ -60,11 +69,15 @@ const Button = <T extends string>({
         onClick={handleButtonClick}
         // Add visual feedback for active state
         style={{
-          backgroundColor: buttonStates[text] ? "#e0e0e0" : "black",
-          border: listening ? "2px solid green" : "2px solid black",
+          backgroundColor: listening && buttonStates[text] ? "gray" : "black",
+          border:
+            listening && buttonStates[text]
+              ? "2px solid green"
+              : "2px solid black",
         }}
       >
-        {pressedButton || (listening ? "Listening..." : "")}
+        {pressedButton ||
+          (listening && buttonStates[text] ? "Listening..." : "")}
       </button>
     </>
   );

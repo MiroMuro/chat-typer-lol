@@ -21,36 +21,40 @@ const ButtonBar = () => {
     }
   );
   return (
-    <div className="button-bar">
-      <Button
-        text="CA"
-        buttonStates={buttonStates}
-        setButtonStates={setButtonStates}
-        buttonValues={buttonValues}
-        setButtonValues={setButtonValues}
-      />
-      <Button
-        text="CS"
-        buttonStates={buttonStates}
-        setButtonStates={setButtonStates}
-        buttonValues={buttonValues}
-        setButtonValues={setButtonValues}
-      />
-      <Button
-        text="AK"
-        buttonStates={buttonStates}
-        setButtonStates={setButtonStates}
-        buttonValues={buttonValues}
-        setButtonValues={setButtonValues}
-      />
-      <Button
-        text="KM"
-        buttonStates={buttonStates}
-        setButtonStates={setButtonStates}
-        buttonValues={buttonValues}
-        setButtonValues={setButtonValues}
-      />
-    </div>
+    <>
+      <div className="button-bar-firstline">
+        <Button
+          text="CA"
+          buttonStates={buttonStates}
+          setButtonStates={setButtonStates}
+          buttonValues={buttonValues}
+          setButtonValues={setButtonValues}
+        />
+        <Button
+          text="CS"
+          buttonStates={buttonStates}
+          setButtonStates={setButtonStates}
+          buttonValues={buttonValues}
+          setButtonValues={setButtonValues}
+        />
+      </div>
+      <div className="button-bar-secondline">
+        <Button
+          text="AK"
+          buttonStates={buttonStates}
+          setButtonStates={setButtonStates}
+          buttonValues={buttonValues}
+          setButtonValues={setButtonValues}
+        />
+        <Button
+          text="KM"
+          buttonStates={buttonStates}
+          setButtonStates={setButtonStates}
+          buttonValues={buttonValues}
+          setButtonValues={setButtonValues}
+        />
+      </div>
+    </>
   );
 };
 export default ButtonBar;
