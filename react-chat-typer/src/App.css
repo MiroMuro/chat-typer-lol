@@ -1,0 +1,42 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.base-grid {
+  width: 1000px;
+  height: 800px;
+  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+}
+.text-area {
+  grid-column: 1 / 6;
+  grid-row: 1 / 4;
+  resize: none;
+}
+.button-bar {
+  grid-column: 1 / 5;
+  grid-row: 4 / 5;
+  display: flex;
+  justify-content: space-between;
+}
+.button {
+  margin: 0px;
+}
+.favoritesDropDown {
+  grid-column: 8/ 12;
+  grid-row: 1 / 12;
+  border: 5px solid white;
+  border-radius: 25px;
+}
+
+.statusBar {
+  grid-column: 1/ 6;
+  grid-row: 6 / 7;
+  border: 5px solid white;
+  border-radius: 25px;
+}
