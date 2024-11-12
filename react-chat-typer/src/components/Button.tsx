@@ -1,47 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
 
-interface ButtonProps {
-  onClick?: () => void;
-  text: ButtonState;
-  buttonStates: {
-    CA: boolean;
-    CS: boolean;
-    AK: boolean;
-    KM: boolean;
-  };
-  setButtonStates: React.Dispatch<
-    React.SetStateAction<{
-      CA: boolean;
-      CS: boolean;
-      AK: boolean;
-      KM: boolean;
-    }>
-  >;
-  buttonValues: {
-    CA: string;
-    CS: string;
-    AK: string;
-    KM: string;
-  };
-  setButtonValues: React.Dispatch<
-    React.SetStateAction<{
-      CA: string;
-      CS: string;
-      AK: string;
-      KM: string;
-    }>
-  >;
+interface ButtonProps<T extends string> {
+  text: T;
+  buttonStates: Record<T, boolean>;
+  setButtonStates: React.Dispatch<React.SetStateAction<Record<T, boolean>>>;
+  buttonValues: Record<T, string>;
+  setButtonValues: React.Dispatch<React.SetStateAction<Record<T, string>>>;
 }
 
-type ButtonState = "CA" | "CS" | "AK" | "KM";
-
-const Button = ({
+const Button = <T extends string>({
   text,
   buttonStates,
   setButtonStates,
   buttonValues,
   setButtonValues,
-}: ButtonProps) => {
+}: ButtonProps<T>) => {
   const [pressedButton, setPressedButton] = useState("");
   const [listening, setListening] = useState(false);
 
@@ -57,19 +30,9 @@ const Button = ({
 
   const handleButtonClick = () => {
     console.log("Button clicked:", text);
+    setPressedButton("");
+    setButtonStates((prevStates) => ({ ...prevStates, [text]: true }));
 
-    // First, update button states
-    const newStates = {
-      CA: false,
-      CS: false,
-      AK: false,
-      KM: false,
-    };
-    newStates[text] = true;
-    setButtonStates(newStates);
-
-    // Then set up listening
-    //setPressedButton("");
     setListening(true);
   };
 
@@ -97,8 +60,8 @@ const Button = ({
         onClick={handleButtonClick}
         // Add visual feedback for active state
         style={{
-          backgroundColor: buttonStates[text] ? "#e0e0e0" : "white",
-          border: listening ? "2px solid blue" : "1px solid black",
+          backgroundColor: buttonStates[text] ? "#e0e0e0" : "black",
+          border: listening ? "2px solid green" : "2px solid black",
         }}
       >
         {pressedButton || (listening ? "Listening..." : "")}
