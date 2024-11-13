@@ -1,8 +1,8 @@
 import TextArea from "./components/TextArea";
-import { useState } from "react";
 import ButtonBar from "./components/ButtonBar";
 import FavoritesDropdown from "./components/FavoritesDropdown";
 import StatusBar from "./components/StatusBar";
+import SubmitMessageButton from "./components/SubmitMessageButton";
 import "./App.css";
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
   return (
     <div className="base-grid">
       <TextArea />
+      <SubmitMessageButton />
       <ButtonBar />
       <FavoritesDropdown favorites={["CA", "CS", "AK", "KM"]} />
       <StatusBar status="Connected" />

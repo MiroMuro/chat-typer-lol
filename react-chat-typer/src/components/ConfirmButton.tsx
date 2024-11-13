@@ -29,13 +29,23 @@ const ConfirmButton = ({ buttonValues }: ConfirmButtonProps) => {
       </button>
       <div className="keyConfirmationDiv">
         <ul>
-          <li>{noUnassignedButtons ? "" : "Some keys are unassigned!"}</li>
-          <li>
-            {buttonValuesAreValidKeys ? "" : "Key value(s) are not valid keys!"}
-          </li>
-          <li>
-            {buttonValuesAreUnique ? "" : "Every key needs to be unique!"}
-          </li>
+          {noUnassignedButtons ? (
+            ""
+          ) : (
+            <li className="keyError">Key values cant be unassigned!</li>
+          )}
+
+          {buttonValuesAreValidKeys ? (
+            ""
+          ) : (
+            <li className="keyError">Key value(s) are not valid keys!</li>
+          )}
+
+          {buttonValuesAreUnique ? (
+            ""
+          ) : (
+            <li className="keyError">Key values must be unique!</li>
+          )}
         </ul>
       </div>
     </>
