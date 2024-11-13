@@ -3,32 +3,24 @@ interface ConfirmButtonProps {
   buttonValues: Record<ButtonState, string>;
 }
 const ConfirmButton = ({ buttonValues }: ConfirmButtonProps) => {
-  console.log("buttonValues", buttonValues);
-
   const noUnassignedButtons: boolean = Object.values(buttonValues).every(
     (value) => value !== ""
   );
 
   const isValidKey = (value: string): boolean => {
-    console.log("value", value);
     const event = new KeyboardEvent("keydown", { key: value });
-    console.log("event", event);
-    console.log("event key", event.key);
     return event.key === value;
   };
 
   const buttonValuesAreValidKeys: boolean =
     Object.values(buttonValues).every(isValidKey);
 
-  console.log("buttonValuesIsaValidKey", buttonValuesAreValidKeys);
   const buttonValuesAreUnique: boolean =
     new Set(Object.values(buttonValues)).size ===
     Object.values(buttonValues).length;
 
   const buttonIsDisabled: boolean =
     noUnassignedButtons && buttonValuesAreValidKeys && buttonValuesAreUnique;
-
-  console.log("buttonIsDisabled", buttonIsDisabled);
 
   return (
     <>

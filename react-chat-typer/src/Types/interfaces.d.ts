@@ -1,1 +1,4 @@
-export type ButtonState = "CA" | "CS" | "AK" | "KM";
+export type ButtonState =
+  | "EndTypingKey"
+  | "BeginTypingKey"
+  | "OpenCloseChatKey";

@@ -7,17 +7,15 @@ const ButtonBar = () => {
   const [buttonStates, setButtonStates] = useState<
     Record<ButtonState, boolean>
   >({
-    CA: false,
-    CS: false,
-    AK: false,
-    KM: false,
+    EndTypingKey: false,
+    BeginTypingKey: false,
+    OpenCloseChatKey: false,
   });
   const [buttonValues, setButtonValues] = useState<Record<ButtonState, string>>(
     {
-      CA: "",
-      CS: "",
-      AK: "",
-      KM: "",
+      EndTypingKey: "",
+      BeginTypingKey: "",
+      OpenCloseChatKey: "",
     }
   );
 
@@ -25,36 +23,31 @@ const ButtonBar = () => {
     <>
       <div className="button-bar-firstline">
         <Button
-          text="CA"
+          text="OpenCloseChatKey"
+          label="Open and close chat key:"
           buttonStates={buttonStates}
           setButtonStates={setButtonStates}
           buttonValues={buttonValues}
           setButtonValues={setButtonValues}
         />
         <Button
-          text="CS"
+          text="BeginTypingKey"
+          label="Begin typing key:"
+          buttonStates={buttonStates}
+          setButtonStates={setButtonStates}
+          buttonValues={buttonValues}
+          setButtonValues={setButtonValues}
+        />
+        <Button
+          text="EndTypingKey"
+          label="End typing key:"
           buttonStates={buttonStates}
           setButtonStates={setButtonStates}
           buttonValues={buttonValues}
           setButtonValues={setButtonValues}
         />
       </div>
-      <div className="button-bar-secondline">
-        <Button
-          text="AK"
-          buttonStates={buttonStates}
-          setButtonStates={setButtonStates}
-          buttonValues={buttonValues}
-          setButtonValues={setButtonValues}
-        />
-        <Button
-          text="KM"
-          buttonStates={buttonStates}
-          setButtonStates={setButtonStates}
-          buttonValues={buttonValues}
-          setButtonValues={setButtonValues}
-        />
-      </div>
+
       <ConfirmButton buttonValues={buttonValues} />
     </>
   );

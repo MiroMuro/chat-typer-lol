@@ -6,6 +6,7 @@ interface ButtonProps<T extends string> {
   setButtonStates: React.Dispatch<React.SetStateAction<Record<T, boolean>>>;
   buttonValues: Record<T, string>;
   setButtonValues: React.Dispatch<React.SetStateAction<Record<T, string>>>;
+  label: string;
 }
 
 const Button = <T extends string>({
@@ -14,8 +15,8 @@ const Button = <T extends string>({
   setButtonStates,
   buttonValues,
   setButtonValues,
+  label,
 }: ButtonProps<T>) => {
-  //const [pressedButton, setPressedButton] = useState(buttonValues[text]);
   const [listening, setListening] = useState(false);
 
   const keyDownHandler = useCallback(
@@ -32,6 +33,7 @@ const Button = <T extends string>({
   const handleButtonClick = () => {
     console.log("Button clicked:", text);
     setButtonValues((prevValues) => ({ ...prevValues, [text]: "" }));
+
     //Can listen multiple buttons at once, not intended behavior.
     //setButtonStates((prevStates) => ({ ...prevStates, [text]: true }));
 
@@ -60,9 +62,9 @@ const Button = <T extends string>({
   }, [listening, buttonStates, text, keyDownHandler]);
 
   return (
-    <>
+    <div className="buttonAndLabelDiv">
       <label htmlFor={`button-${text}`} className="label">
-        {text}
+        {label}
       </label>
       <button
         id={`button-${text}`}
@@ -80,7 +82,7 @@ const Button = <T extends string>({
         {buttonValues[text] ||
           (listening && buttonStates[text] ? "Listening..." : "")}
       </button>
-    </>
+    </div>
   );
 };
 
