@@ -15,22 +15,23 @@ const Button = <T extends string>({
   buttonValues,
   setButtonValues,
 }: ButtonProps<T>) => {
-  const [pressedButton, setPressedButton] = useState("");
+  //const [pressedButton, setPressedButton] = useState(buttonValues[text]);
   const [listening, setListening] = useState(false);
 
   const keyDownHandler = useCallback(
     (event: KeyboardEvent) => {
       event.preventDefault();
       console.log("Keydown event:", event.key, "for button: ", text);
-      setPressedButton(event.key);
+      setButtonValues((prevValues) => ({ ...prevValues, [text]: event.key }));
+      //setPressedButton(event.key);
       setListening(false);
     },
-    [text]
+    [text, setButtonValues]
   );
 
   const handleButtonClick = () => {
     console.log("Button clicked:", text);
-    setPressedButton("");
+    setButtonValues((prevValues) => ({ ...prevValues, [text]: "" }));
     //Can listen multiple buttons at once, not intended behavior.
     //setButtonStates((prevStates) => ({ ...prevStates, [text]: true }));
 
@@ -76,7 +77,7 @@ const Button = <T extends string>({
               : "2px solid black",
         }}
       >
-        {pressedButton ||
+        {buttonValues[text] ||
           (listening && buttonStates[text] ? "Listening..." : "")}
       </button>
     </>

@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useState } from "react";
-
-type ButtonState = "CA" | "CS" | "AK" | "KM";
+import ConfirmButton from "./ConfirmButton";
+import { ButtonState } from "../Types/interfaces";
 
 const ButtonBar = () => {
   const [buttonStates, setButtonStates] = useState<
@@ -20,6 +20,7 @@ const ButtonBar = () => {
       KM: "",
     }
   );
+
   return (
     <>
       <div className="button-bar-firstline">
@@ -54,6 +55,7 @@ const ButtonBar = () => {
           setButtonValues={setButtonValues}
         />
       </div>
+      <ConfirmButton buttonValues={buttonValues} />
     </>
   );
 };
