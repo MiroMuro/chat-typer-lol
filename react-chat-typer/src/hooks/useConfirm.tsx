@@ -5,13 +5,13 @@ interface ConfirmButtonProps {
 }
 const useConfirm = () => {
   const confirmStartTypeKey = (key: string) => {
-    console.log("Start typing key confirmed: ", key);
+    window.ipcRenderer.sendStartKey(key);
   };
   const confirmEndTypeKey = (key: string) => {
-    console.log("End typing key confirmed: ", key);
+    window.ipcRenderer.sendStopKey(key);
   };
   const confirmChatKeyOpenAndCloseKey = (key: string) => {
-    console.log("Chat key open and close confirmed: ", key);
+    window.ipcRenderer.sendChatOpenAndCloseKey(key);
   };
 
   const confirmKeys = ({ buttonValues }: ConfirmButtonProps) => {
