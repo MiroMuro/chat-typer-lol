@@ -22,7 +22,6 @@ const Button = <T extends string>({
   const keyDownHandler = useCallback(
     (event: KeyboardEvent) => {
       event.preventDefault();
-      console.log("Keydown event:", event.key, "for button: ", text);
       setButtonValues((prevValues) => ({ ...prevValues, [text]: event.key }));
       //setPressedButton(event.key);
       setListening(false);
@@ -31,7 +30,6 @@ const Button = <T extends string>({
   );
 
   const handleButtonClick = () => {
-    console.log("Button clicked:", text);
     setButtonValues((prevValues) => ({ ...prevValues, [text]: "" }));
 
     //Can listen multiple buttons at once, not intended behavior.
@@ -44,19 +42,17 @@ const Button = <T extends string>({
       ),
     }));
 
-    console.log("Button states:", buttonStates);
     setListening(true);
   };
 
   useEffect(() => {
     if (listening && buttonStates[text]) {
-      console.log("Adding event listener for button:", text);
       window.addEventListener("keydown", keyDownHandler);
     }
-    //Remove event listener when unmounting, or dependencies change.
+
+    //Remove event listener when unmounting, or when dependencies change.
     return () => {
       //setListening(false);
-      console.log("Removing event listener for button:", text);
       window.removeEventListener("keydown", keyDownHandler);
     };
   }, [listening, buttonStates, text, keyDownHandler]);

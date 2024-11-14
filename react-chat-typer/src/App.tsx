@@ -6,13 +6,6 @@ import SubmitMessageButton from "./components/SubmitMessageButton";
 import "./App.css";
 
 function App() {
-  /*const buttonStatuses = {
-    CA: "",
-    CS: "",
-    AK: "",
-    KM: ""
-  }*/
-
   return (
     <div className="base-grid">
       <TextArea />

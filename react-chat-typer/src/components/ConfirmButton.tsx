@@ -1,8 +1,18 @@
 import { ButtonState } from "../Types/interfaces";
+import useConfirm from "../hooks/useConfirm";
 interface ConfirmButtonProps {
   buttonValues: Record<ButtonState, string>;
 }
 const ConfirmButton = ({ buttonValues }: ConfirmButtonProps) => {
+  const { confirmKeys } = useConfirm();
+
+  const handleClick = () => {
+    if (!ButtonAndKeyStateIsOk) {
+      return;
+    }
+    confirmKeys({ buttonValues });
+  };
+
   const noUnassignedButtons: boolean = Object.values(buttonValues).every(
     (value) => value !== ""
   );
@@ -19,12 +29,16 @@ const ConfirmButton = ({ buttonValues }: ConfirmButtonProps) => {
     new Set(Object.values(buttonValues)).size ===
     Object.values(buttonValues).length;
 
-  const buttonIsDisabled: boolean =
+  const ButtonAndKeyStateIsOk: boolean =
     noUnassignedButtons && buttonValuesAreValidKeys && buttonValuesAreUnique;
 
   return (
     <>
-      <button disabled={!buttonIsDisabled} className="confirmButton">
+      <button
+        disabled={!ButtonAndKeyStateIsOk}
+        className="confirmButton"
+        onClick={handleClick}
+      >
         Confirm keys
       </button>
       <div className="keyConfirmationDiv">
