@@ -1,29 +1,83 @@
 import { useState, useEffect } from "react";
 import { ButtonState } from "../Types/interfaces";
-interface StatusBarProps {
-  status: string;
-}
 
 type keyAndStatus = {
   key: string;
   status: boolean;
 };
 
-type Button<T> = {
-  [K in keyof T]: keyAndStatus;
+type Button = {
+  [K in ButtonState]: keyAndStatus;
 };
+//(alias) type ButtonState = "EndTypingKey" | "BeginTypingKey" | "OpenCloseChatKey"
 
-const StatusBar = ({ status }: StatusBarProps) => {
-  const [buttons, setButtons] = useState<Button<ButtonState>>(
-    () => ({} as Button<ButtonState>)
-  );
+const StatusBar = () => {
+  const [buttons, setButtons] = useState<Button>({
+    EndTypingKey: { key: "", status: false },
+    BeginTypingKey: { key: "", status: false },
+    OpenCloseChatKey: { key: "", status: false },
+  });
 
-  useEffect(() => {});
+  useEffect(() => {
+    window.ipcRenderer.receiveStartKey("start-key", (data: keyAndStatus) => {
+      setButtons((prev) => {
+        return { ...prev, BeginTypingKey: data };
+      });
+    });
+    window.ipcRenderer.receiveStopKey("stop-key", (data: keyAndStatus) => {
+      setButtons((prev) => {
+        return { ...prev, EndTypingKey: data };
+      });
+    });
+    window.ipcRenderer.receiveChatOpenAndCloseKey(
+      "chat-open-and-close-key",
+      (data: keyAndStatus) => {
+        setButtons((prev) => {
+          return { ...prev, OpenCloseChatKey: data };
+        });
+      }
+    );
+
+    return () => {
+      window.ipcRenderer.removeStartKeyListener("start-key");
+    };
+  }, []);
 
   return (
     <span className="statusBar">
-      {!status && <p>No status yet</p>} : {status}
+      <ButtonStatus
+        buttonState={buttons.BeginTypingKey}
+        buttonName="Begin typing key"
+      />
+      <ButtonStatus
+        buttonState={buttons.EndTypingKey}
+        buttonName="Stop typing key"
+      />
+      <ButtonStatus
+        buttonState={buttons.OpenCloseChatKey}
+        buttonName="Open and close chat key."
+      />
     </span>
+  );
+};
+
+const ButtonStatus = ({
+  buttonState,
+  buttonName,
+}: {
+  buttonState: keyAndStatus;
+  buttonName: string;
+}) => {
+  return (
+    <>
+      {!buttonState.status ? (
+        <div>{buttonName} not defined correctly!</div>
+      ) : (
+        <div>
+          {buttonName} defined correctly. Set to: {buttonState.key}
+        </div>
+      )}
+    </>
   );
 };
 

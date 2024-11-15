@@ -8,6 +8,19 @@ export interface ipcRenderer {
   sendStartKey: (key: string) => void;
   sendStopKey: (key: string) => void;
   sendChatOpenAndCloseKey: (key: string) => void;
+  receiveStartKey: (
+    channel: string,
+    func: (data: { key: string; status: boolean }) => void
+  ) => void;
+  receiveStopKey: (
+    channel: string,
+    func: (data: { key: string; status: boolean }) => void
+  ) => void;
+  receiveChatOpenAndCloseKey: (
+    channel: string,
+    func: (data: { key: string; status: boolean }) => void
+  ) => void;
+  removeStartKeyListener: (channel: string) => void;
 }
 
 declare global {
