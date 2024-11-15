@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useState } from "react";
 import ConfirmButton from "./ConfirmButton";
-import { ButtonState } from "../Types/interfaces";
+import { ButtonState } from "../../Types/interfaces";
 
 const ButtonBar = () => {
   const [buttonStates, setButtonStates] = useState<

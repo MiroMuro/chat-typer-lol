@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ButtonState } from "../Types/interfaces";
+import { ButtonState } from "../../Types/interfaces";
 
 type keyAndStatus = {
   key: string;
@@ -55,7 +55,7 @@ const StatusBar = () => {
       />
       <ButtonStatus
         buttonState={buttons.OpenCloseChatKey}
-        buttonName="Open and close chat key."
+        buttonName="Open and close chat key"
       />
     </span>
   );
@@ -70,13 +70,16 @@ const ButtonStatus = ({
 }) => {
   return (
     <>
-      {!buttonState.status ? (
-        <div>{buttonName} not defined correctly!</div>
-      ) : (
-        <div>
-          {buttonName} defined correctly. Set to: {buttonState.key}
-        </div>
-      )}
+      <div className="buttonStatus">
+        <header>{buttonName} status:</header>
+        <p>
+          {!buttonState.status ? (
+            <div>Not defined</div>
+          ) : (
+            <div>Set to key: {buttonState.key}</div>
+          )}
+        </p>
+      </div>
     </>
   );
 };

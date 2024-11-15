@@ -1,5 +1,5 @@
-import { ButtonState } from "../Types/interfaces";
-import useConfirm from "../hooks/useConfirm";
+import { ButtonState } from "../../Types/interfaces";
+import useConfirm from "../../hooks/useConfirm";
 interface ConfirmButtonProps {
   buttonValues: Record<ButtonState, string>;
 }

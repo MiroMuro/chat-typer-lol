@@ -47,6 +47,7 @@
   grid-row: 8 / 9;
   border: 5px solid white;
   border-radius: 25px;
+  display: flex;
 }
 
 .confirmButton {

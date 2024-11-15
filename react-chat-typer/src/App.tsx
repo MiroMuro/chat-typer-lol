@@ -1,18 +1,16 @@
-import TextArea from "./components/TextArea";
-import ButtonBar from "./components/ButtonBar";
+import CopyPastaTextForm from "./components/Copypasta/CopypastaTextForm";
+import ButtonBar from "./components/Buttons/ButtonBar";
 import FavoritesDropdown from "./components/FavoritesDropdown";
-import StatusBar from "./components/StatusBar";
-import SubmitMessageButton from "./components/SubmitMessageButton";
+import ButtonStatusBar from "./components/Buttons/ButtonStatusBar";
 import "./App.css";
 
 function App() {
   return (
     <div className="base-grid">
-      <TextArea />
-      <SubmitMessageButton />
+      <CopyPastaTextForm />
       <ButtonBar />
       <FavoritesDropdown favorites={["CA", "CS", "AK", "KM"]} />
-      <StatusBar status="Connected" />
+      <ButtonStatusBar />
     </div>
   );
 }

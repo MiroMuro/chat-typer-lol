@@ -10,8 +10,8 @@ if (require("electron-squirrel-startup")) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 800,
+    width: 1200,
+    height: 900,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -61,4 +61,8 @@ ipcMain.on("stop-key", (event, key) => {
 
 ipcMain.on("chat-open-and-close-key", (event, key) => {
   event.reply("chat-open-and-close-key", { key: key, status: true });
+});
+
+ipcMain.on("copy-pasta", (event, key) => {
+  event.reply("copy-pasta", { status: true });
 });
