@@ -8,6 +8,10 @@ export interface ipcRenderer {
   sendStartKey: (key: string) => void;
   sendStopKey: (key: string) => void;
   sendChatOpenAndCloseKey: (key: string) => void;
+  receiveCopyPasta: (
+    channel: string,
+    func: (data: { status: boolean }) => void
+  ) => void;
   receiveStartKey: (
     channel: string,
     func: (data: { key: string; status: boolean }) => void
