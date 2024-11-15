@@ -14,13 +14,17 @@ const CopyPastaStatus = () => {
 
   return (
     <div className="copyPastaStatusBar">
-      <header style={{ display: "inline" }}>Copypasta staus: </header>
+      <header style={{ display: "inline", padding: "5px" }}>
+        Copypasta status:{" "}
+      </header>
       {copyPastaStatus ? (
-        <p style={{ display: "flex", margin: "0" }}>
+        <p style={{ display: "flex", margin: "0", flex: 1 }}>
           Copypasta set successfully
         </p>
       ) : (
-        <p style={{ display: "flex", margin: "0" }}>No copypasta defined</p>
+        <p style={{ display: "flex", margin: "0", flex: 1 }}>
+          No copypasta defined
+        </p>
       )}
     </div>
   );

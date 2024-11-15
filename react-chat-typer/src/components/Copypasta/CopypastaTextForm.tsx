@@ -22,7 +22,7 @@ const CopyPastaTextForm = () => {
         }}
       />
       <CopyPastaStatus />
-      <SubmitCopyPastaButton />
+      <SubmitCopyPastaButton isDisabled={copyPasta.length > 0 ? true : false} />
     </form>
   );
 };

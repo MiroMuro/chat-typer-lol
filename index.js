@@ -63,6 +63,7 @@ ipcMain.on("chat-open-and-close-key", (event, key) => {
   event.reply("chat-open-and-close-key", { key: key, status: true });
 });
 
-ipcMain.on("copy-pasta", (event, key) => {
+ipcMain.on("copy-pasta", (event) => {
+  console.log("Copy pasta event received");
   event.reply("copy-pasta", { status: true });
 });

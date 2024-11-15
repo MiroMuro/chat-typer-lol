@@ -1,7 +1,9 @@
 const useCopyPasta = () => {
   const submitCopyPasta = (copyPasta: string) => {
+    console.log("submitCopyPasta");
+    console.log("submitCopyPasta");
     if (copyPasta.length > 0) {
-      window.ipcRenderer.sendCopypasta(copyPasta);
+      window.ipcRenderer.sendCopyPasta(copyPasta);
       return;
     }
     return;

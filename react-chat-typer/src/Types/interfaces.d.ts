@@ -4,7 +4,7 @@ export type ButtonState =
   | "OpenCloseChatKey";
 
 export interface ipcRenderer {
-  sendCopypasta: (copypasta: string) => void;
+  sendCopyPasta: (copypasta: string) => void;
   sendStartKey: (key: string) => void;
   sendStopKey: (key: string) => void;
   sendChatOpenAndCloseKey: (key: string) => void;
